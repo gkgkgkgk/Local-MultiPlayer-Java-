@@ -35,7 +35,7 @@ public class StartPanel extends JPanel implements ActionListener{
 		
 		void addPlayerPanel(){
 			playerAmount += 1;
-			add(new PlayerPanel(playerAmount));
+			add(new PlayerPanel(playerAmount, Color.BLUE));
 			revalidate();
 		}
 
