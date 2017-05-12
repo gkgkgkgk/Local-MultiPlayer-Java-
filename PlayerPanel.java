@@ -10,24 +10,25 @@ public class PlayerPanel extends JPanel{
 	private JButton chooseColor = new JButton();
 	Color color;
 	char control = 'a';
-	
-	
+		
 	Character[] letters = new Character[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 	
 	JComboBox<Character> controls = new JComboBox<Character>(letters);
  
 	
-	public PlayerPanel(int num, Color c){
+	public PlayerPanel(int num, Color c, char con){
 		this.num = num;
 		chooseColor.setOpaque(true);
 		chooseColor.setBackground(c);
+		color = c;
+		control = con;
 		playerNum = new JLabel("Player "+num);
 		add(playerNum);
 		add(chooseColor);
 		add(controls);
 		chooseColor.setBorderPainted(false);
 		chooseColor.addActionListener(new ButtonListener());
-	
+		controls.setSelectedItem(con);
 	}
 
 	public int getPlayerNum(){return num;}

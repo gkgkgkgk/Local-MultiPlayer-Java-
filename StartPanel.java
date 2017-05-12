@@ -35,8 +35,10 @@ public class StartPanel extends JPanel implements ActionListener{
 		
 		public void actionPerformed(ActionEvent e){
 			if(e.getSource() == addPlayer){addPlayerPanel();}
+				double counter = 0;
 			if(e.getSource() == start){for(PlayerPanel p : playerPanels){
-				players.add(new Player(p.getPlayerNum(), p.getColor(), p.getControl()));
+				counter += 1;
+				players.add(new Player(p.getPlayerNum(), p.getColor(), p.getControl(), counter*(600.0/playerAmount)));
 			}
 			System.out.println("BOI");
 			new Game(players);
@@ -47,10 +49,15 @@ public class StartPanel extends JPanel implements ActionListener{
 		
 		void addPlayerPanel(){
 			playerAmount += 1;
-			PlayerPanel p = new PlayerPanel(playerAmount, Color.BLUE);
+			Character[] letters = new Character[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+			Color[] colors = new Color[]{Color.BLUE, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.GRAY, Color.BLACK, Color.YELLOW};
+			PlayerPanel p = new PlayerPanel(playerAmount, colors[playerAmount-1], letters[playerAmount-1]);
 			add(p);
 			playerPanels.add(p);
 			revalidate();
+			if(playerAmount >= 8){
+				 remove(addPlayer);
+			}
 		}
 
 }

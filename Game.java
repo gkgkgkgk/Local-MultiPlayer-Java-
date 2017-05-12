@@ -33,7 +33,12 @@ public class Game extends JPanel implements KeyListener{
 		public void loop(){
 		t.scheduleAtFixedRate(new TimerTask() {
 		      public void run() {
-				  players.get(0).setRotation(time);
+				  for(Player p : players){
+				  p.setRotation(1);
+				  if(p.move){
+					  p.setPosition(2.0*Math.cos(Math.toRadians(p.getRotation())), 2.0*Math.sin(Math.toRadians(p.getRotation())));
+				  }
+				  }
 				  time++;
 		        repaint();
 	}
@@ -43,11 +48,17 @@ public class Game extends JPanel implements KeyListener{
 			 for(Player p : players){
 				 if(e.getKeyChar() == p.getControl()){
 					 System.out.println(p.getControl());
+					p.move = true;
 				 }
 			 }
 		 }
 		 public void keyReleased(KeyEvent e) {
-
+			for(Player p : players){
+				 if(e.getKeyChar() == p.getControl()){
+					 System.out.println(p.getControl());
+					p.move = false;
+				 }
+			 }
 
 		 }
 		    public void keyTyped(KeyEvent e) {}
@@ -55,7 +66,7 @@ public class Game extends JPanel implements KeyListener{
 
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
-			players.get(0).DrawPlayer(g);
+			for(Player p : players){p.DrawPlayer(g);}
 		}
 
 
