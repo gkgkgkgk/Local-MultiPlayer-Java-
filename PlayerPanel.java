@@ -9,7 +9,7 @@ public class PlayerPanel extends JPanel{
 	int num;
 	private JButton chooseColor = new JButton();
 	Color color;
-	char control;
+	char control = 'a';
 	
 	
 	Character[] letters = new Character[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
@@ -32,7 +32,7 @@ public class PlayerPanel extends JPanel{
 
 	public int getPlayerNum(){return num;}
 	public Color getColor(){return color;}
-	public char getControl(){return control;}
+	public char getControl(){return controls.getSelectedItem().toString().charAt(0);}
 
 	
 	private class ButtonListener implements ActionListener {
