@@ -8,17 +8,21 @@ public class Player{
 
 	int playerNumber;
 	Color color;
-	char control;
+	char controlLeft;
+		char controlRight;
+
 	double rotation = 90.0;
 	double xPos = 50;
 	double yPos = 200;
-	boolean move = false;
+	boolean moveRight = false;
+	boolean moveLeft = false;
+
 	
-	
-	public Player(int num, Color c, char con, double y){
+	public Player(int num, Color c, char conL, char conR, double y){
 		this.playerNumber = num;
 		this.color = c;
-		this.control = con;
+		this.controlRight = conR;
+		this.controlLeft = conL;
 		yPos = y;
 	}
 	
@@ -38,7 +42,9 @@ public class Player{
 		g2d.setTransform(old);
 	}
 	
-	public char getControl(){return control;}
+	public char getControlLeft(){return controlLeft;}
+		public char getControlRight(){return controlRight;}
+
 	public int getPlayerNum(){return playerNumber;}
 	public double getRotation(){return rotation;}
 

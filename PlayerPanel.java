@@ -9,31 +9,38 @@ public class PlayerPanel extends JPanel{
 	int num;
 	private JButton chooseColor = new JButton();
 	Color color;
-	char control = 'a';
-		
-	Character[] letters = new Character[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+	char controlRight = 'a';
+	char controlLeft = 'a';
+
+	Character[] lettersL = new Character[] {'a','k','g','d','z','n','b','q','o','t','e','i'};
+	Character[] lettersR = new Character[] {'s','l','h','f','x','m','v','w','p','y','r','u'};
+
+	JComboBox<Character> controlsL = new JComboBox<Character>(lettersL);
+ 	JComboBox<Character> controlsR = new JComboBox<Character>(lettersR);
+
 	
-	JComboBox<Character> controls = new JComboBox<Character>(letters);
- 
-	
-	public PlayerPanel(int num, Color c, char con){
+	public PlayerPanel(int num, Color c, char conL, char conR){
 		this.num = num;
 		chooseColor.setOpaque(true);
 		chooseColor.setBackground(c);
 		color = c;
-		control = con;
+		controlRight = conR;
+		controlLeft = conL;
 		playerNum = new JLabel("Player "+num);
 		add(playerNum);
 		add(chooseColor);
-		add(controls);
+		add(controlsL);
+		add(controlsR);
 		chooseColor.setBorderPainted(false);
 		chooseColor.addActionListener(new ButtonListener());
-		controls.setSelectedItem(con);
+		controlsL.setSelectedItem(conL);
+		controlsR.setSelectedItem(conR);
 	}
 
 	public int getPlayerNum(){return num;}
 	public Color getColor(){return color;}
-	public char getControl(){return controls.getSelectedItem().toString().charAt(0);}
+	public char getControlR(){return controlsR.getSelectedItem().toString().charAt(0);}
+	public char getControlL(){return controlsL.getSelectedItem().toString().charAt(0);}
 
 	
 	private class ButtonListener implements ActionListener {

@@ -38,9 +38,8 @@ public class StartPanel extends JPanel implements ActionListener{
 				double counter = 0;
 			if(e.getSource() == start){for(PlayerPanel p : playerPanels){
 				counter += 1;
-				players.add(new Player(p.getPlayerNum(), p.getColor(), p.getControl(), counter*(600.0/playerAmount)));
+				players.add(new Player(p.getPlayerNum(), p.getColor(), p.getControlL(), p.getControlR(), counter*(600.0/(playerAmount+1.0))));
 			}
-			System.out.println("BOI");
 			new Game(players);
 		}
 			
@@ -49,9 +48,10 @@ public class StartPanel extends JPanel implements ActionListener{
 		
 		void addPlayerPanel(){
 			playerAmount += 1;
-			Character[] letters = new Character[] {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+			Character[] lettersL = new Character[] {'a','k','g','d','z','n','b','q','o','t','e','i'};
+			Character[] lettersR = new Character[] {'s','l','h','f','x','m','v','w','p','y','r','u'};
 			Color[] colors = new Color[]{Color.BLUE, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.GRAY, Color.BLACK, Color.YELLOW};
-			PlayerPanel p = new PlayerPanel(playerAmount, colors[playerAmount-1], letters[playerAmount-1]);
+			PlayerPanel p = new PlayerPanel(playerAmount, colors[playerAmount-1], lettersL[playerAmount-1], lettersR[playerAmount-1]);
 			add(p);
 			playerPanels.add(p);
 			revalidate();
