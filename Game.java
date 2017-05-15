@@ -23,9 +23,6 @@ public class Game extends JPanel implements KeyListener{
 	public Game(ArrayList<Player> p){
 		players = p;
 		System.out.println(players.size());
-		
-		obstacles.add(new Obstacle(new Rectangle(100,100,100,100), Color.RED));
-		
 		w = new JFrame();
 		w.addKeyListener(this);
 		w.setSize(width, height);
@@ -33,6 +30,10 @@ public class Game extends JPanel implements KeyListener{
 		w.setVisible(true);
 		w.setContentPane(this);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		for(int i = 0; i < 5; i++){
+		obstacles.add(new Obstacle(new Rectangle((int)(Math.random()*(width-80)), (int)(Math.random()*(height-80)), (int)(Math.random()*150), (int)(Math.random()*150)), Color.RED));
+		}
 		loop(); // start the game loop
 		}
 
@@ -90,6 +91,10 @@ public class Game extends JPanel implements KeyListener{
 
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
+			g.setColor(Color.WHITE);
+			g.fillRect(0,0,width,height);
+			g.setColor(Color.BLACK);
+			g.drawRect(40, 40, width-80, height-80);
 			for(Player p : players){p.DrawPlayer(g);} //draw players
 			for(Obstacle o : obstacles){o.draw(g);} //draw obstacles
 			

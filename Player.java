@@ -40,7 +40,7 @@ public class Player{
 		g2d.translate(xPos, yPos); // Translate the center of our coordinates.
 		g2d.rotate(Math.toRadians(rotation), 0, 0);
 		g.fillPolygon(new int[] {-10, 10, -10}, new int[] {-5, 0, 5}, 3);
-		g.drawRect(-10,-5, 20, 10);
+		//g.drawRect(-10,-5, 20, 10); Optional Draw Bounds
 		g2d.setTransform(old);
 	}
 	
