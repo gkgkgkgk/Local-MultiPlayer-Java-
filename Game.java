@@ -15,7 +15,8 @@ public class Game extends JPanel implements KeyListener{
 	ArrayList<Player> players = new ArrayList<Player>();
 	double time;
 	
-	 Timer t = new Timer();
+	Timer t = new Timer();
+		
 	
 	public Game(ArrayList<Player> p){
 		players = p;
