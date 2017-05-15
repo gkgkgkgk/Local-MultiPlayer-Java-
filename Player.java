@@ -9,13 +9,14 @@ public class Player{
 	int playerNumber;
 	Color color;
 	char controlLeft;
-		char controlRight;
+	char controlRight;
 
 	double rotation = 0.0;
 	double xPos = 50;
 	double yPos = 200;
 	boolean moveRight = false;
 	boolean moveLeft = false;
+	Rectangle bounds = new Rectangle((int)xPos, (int)yPos, 20, 10);
 
 	
 	public Player(int num, Color c, char conL, char conR, double y){
@@ -39,6 +40,7 @@ public class Player{
 		g2d.translate(xPos, yPos); // Translate the center of our coordinates.
 		g2d.rotate(Math.toRadians(rotation), 0, 0);
 		g.fillPolygon(new int[] {-10, 10, -10}, new int[] {-5, 0, 5}, 3);
+		g.drawRect(-10,-5, 20, 10);
 		g2d.setTransform(old);
 	}
 	
@@ -55,5 +57,28 @@ public class Player{
 		xPos += x;
 		yPos += y;
 	}
+	
+	public void checkCollision(ArrayList<Obstacle> obstacles){
+		double normal;
+		while(rotation < 0){rotation += 360.0;}
+		while(rotation > 360){rotation -= 360.0;}
+		System.out.println(rotation);
+		for(Obstacle o : obstacles){if(bounds.intersects(o.getBounds())){
+			if(xPos <= o.getBounds().getX()){
+				setXPos((int)o.getBounds().getX()-10);
+			}
+			if(xPos > o.getBounds().getX() + (o.getBounds().getWidth())){
+				setXPos(10+(int)o.getBounds().getX()+ (int)(o.getBounds().getWidth()));
+			}
+			if(yPos <= o.getBounds().getY()){
+				setYPos((int)o.getBounds().getY()-5);
+			}
+			if(yPos > o.getBounds().getY() + (o.getBounds().getHeight())){
+				setYPos(5+(int)o.getBounds().getY()+ (int)(o.getBounds().getHeight()));
+			}
+		}}
+	}
+	
+	public void refreshBounds(){bounds = new Rectangle((int)xPos-10, (int)yPos-5, 20, 10);}
 
 }

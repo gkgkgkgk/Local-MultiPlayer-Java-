@@ -19,5 +19,6 @@ public class Obstacle {
 		g.fillRect((int)boundaries.getX(), (int)boundaries.getY(), (int)boundaries.getWidth(), (int)boundaries.getHeight());
 	}
 	
+	public Rectangle getBounds(){return boundaries;}
 
 }

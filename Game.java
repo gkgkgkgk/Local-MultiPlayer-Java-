@@ -13,6 +13,8 @@ public class Game extends JPanel implements KeyListener{
 	int height = 600;
 	int width = 800;
 	ArrayList<Player> players = new ArrayList<Player>();
+	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+	
 	double time;
 	
 	Timer t = new Timer();
@@ -22,6 +24,8 @@ public class Game extends JPanel implements KeyListener{
 		players = p;
 		System.out.println(players.size());
 		
+		obstacles.add(new Obstacle(new Rectangle(100,100,100,100), Color.RED));
+		
 		w = new JFrame();
 		w.addKeyListener(this);
 		w.setSize(width, height);
@@ -29,16 +33,18 @@ public class Game extends JPanel implements KeyListener{
 		w.setVisible(true);
 		w.setContentPane(this);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loop();
+		loop(); // start the game loop
 		}
 
 		public void loop(){
 		t.scheduleAtFixedRate(new TimerTask() {
 		      public void run() {
 				  for(Player p : players){
-					
+					  System.out.println(p.getRotation());
+					p.refreshBounds();
 					p.setPosition(Math.cos(Math.toRadians(p.getRotation())), Math.sin(Math.toRadians(p.getRotation())));
 					
+					p.checkCollision(obstacles);
 					//boundary collision//
 					if(p.getYPos()>height-50){p.setYPos(height-50);}
 					if(p.getYPos()<50){p.setYPos(50);}
@@ -84,7 +90,9 @@ public class Game extends JPanel implements KeyListener{
 
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
-			for(Player p : players){p.DrawPlayer(g);}
+			for(Player p : players){p.DrawPlayer(g);} //draw players
+			for(Obstacle o : obstacles){o.draw(g);} //draw obstacles
+			
 		}
 
 
