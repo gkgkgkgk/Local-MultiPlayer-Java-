@@ -11,7 +11,7 @@ public class Player{
 	char controlLeft;
 		char controlRight;
 
-	double rotation = 90.0;
+	double rotation = 0.0;
 	double xPos = 50;
 	double yPos = 200;
 	boolean moveRight = false;
@@ -43,8 +43,11 @@ public class Player{
 	}
 	
 	public char getControlLeft(){return controlLeft;}
-		public char getControlRight(){return controlRight;}
-
+	public char getControlRight(){return controlRight;}
+	public double getXPos(){return xPos;}
+	public double getYPos(){return yPos;}
+	public void setXPos(int x){xPos = x;}
+	public void setYPos(int y){yPos = y;}
 	public int getPlayerNum(){return playerNumber;}
 	public double getRotation(){return rotation;}
 

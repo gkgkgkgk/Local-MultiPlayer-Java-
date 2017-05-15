@@ -24,6 +24,7 @@ public class Game extends JPanel implements KeyListener{
 		w = new JFrame();
 		w.addKeyListener(this);
 		w.setSize(width, height);
+		w.setResizable(false);
 		w.setVisible(true);
 		w.setContentPane(this);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,7 +35,16 @@ public class Game extends JPanel implements KeyListener{
 		t.scheduleAtFixedRate(new TimerTask() {
 		      public void run() {
 				  for(Player p : players){
+					
 					p.setPosition(Math.cos(Math.toRadians(p.getRotation())), Math.sin(Math.toRadians(p.getRotation())));
+					
+					//boundary collision//
+					if(p.getYPos()>height-50){p.setYPos(height-50);}
+					if(p.getYPos()<50){p.setYPos(50);}
+					if(p.getXPos()>width-50){p.setXPos(width-50);}
+					if(p.getXPos()<50){p.setXPos(50);}
+					//boundary collision//
+					
 				  if(p.moveRight){
 					p.setRotation(3); 
 				  }
