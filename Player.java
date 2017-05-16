@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.awt.geom.AffineTransform;
+import java.awt.geom.*;
 
 
 public class Player{
@@ -17,7 +17,7 @@ public class Player{
 	boolean moveRight = false;
 	boolean moveLeft = false;
 	Rectangle bounds = new Rectangle((int)xPos, (int)yPos, 20, 10);
-
+	Polygon boundsTest;	
 	
 	public Player(int num, Color c, char conL, char conR, double y){
 		this.playerNumber = num;
@@ -33,6 +33,8 @@ public class Player{
 	}
 	
 	public void DrawPlayer(Graphics g){
+		g.drawRect((int)(xPos-(Math.cos(Math.toRadians(rotation))*-10)) -5 ,(int)(yPos-(Math.sin(Math.toRadians(rotation))*-5))-5, 10, 10); //Optional Draw Bounds
+		
 		Graphics2D g2d = (Graphics2D) g; // Create a Java2D version of g.
 		        //store old rotation
 		AffineTransform old = g2d.getTransform();
@@ -40,7 +42,6 @@ public class Player{
 		g2d.translate(xPos, yPos); // Translate the center of our coordinates.
 		g2d.rotate(Math.toRadians(rotation), 0, 0);
 		g.fillPolygon(new int[] {-10, 10, -10}, new int[] {-5, 0, 5}, 3);
-		//g.drawRect(-10,-5, 20, 10); Optional Draw Bounds
 		g2d.setTransform(old);
 	}
 	
@@ -79,6 +80,8 @@ public class Player{
 		}}
 	}
 	
-	public void refreshBounds(){bounds = new Rectangle((int)xPos-10, (int)yPos-5, 20, 10);}
+	public void refreshBounds(){
+				 bounds = new Rectangle((int)(xPos-(Math.cos(Math.toRadians(rotation))*-10)) -5 ,(int)(yPos-(Math.sin(Math.toRadians(rotation))*-5))-5, 10, 10);
+			 }
 
 }

@@ -31,8 +31,8 @@ public class Game extends JPanel implements KeyListener{
 		w.setContentPane(this);
         w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		for(int i = 0; i < 5; i++){
-		obstacles.add(new Obstacle(new Rectangle((int)(Math.random()*(width-80)), (int)(Math.random()*(height-80)), (int)(Math.random()*150), (int)(Math.random()*150)), Color.RED));
+		for(int i = 0; i < 50; i++){
+		obstacles.add(new Obstacle(new Rectangle((int)(Math.random()*(width-80)), (int)(Math.random()*(height-80)), (int)(Math.random()*50), (int)(Math.random()*50)), Color.RED));
 		}
 		loop(); // start the game loop
 		}
