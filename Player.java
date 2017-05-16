@@ -10,20 +10,28 @@ public class Player{
 	Color color;
 	char controlLeft;
 	char controlRight;
+	char controlShoot;
 
 	double rotation = 0.0;
 	double xPos = 50;
 	double yPos = 200;
 	boolean moveRight = false;
 	boolean moveLeft = false;
+	boolean shoot = false;
 	Rectangle bounds = new Rectangle((int)xPos, (int)yPos, 20, 10);
 	Polygon boundsTest;	
 	
-	public Player(int num, Color c, char conL, char conR, double y){
+	double coolDown = 1.0;
+	double coolDownStore = 1.0;
+	
+	
+	
+	public Player(int num, Color c, char conL, char conR, char conShoot, double y){
 		this.playerNumber = num;
 		this.color = c;
 		this.controlRight = conR;
 		this.controlLeft = conL;
+		this.controlShoot = conShoot;
 		yPos = y;
 	}
 	
@@ -47,12 +55,14 @@ public class Player{
 	
 	public char getControlLeft(){return controlLeft;}
 	public char getControlRight(){return controlRight;}
+	public char getControlShoot(){return controlShoot;}
 	public double getXPos(){return xPos;}
 	public double getYPos(){return yPos;}
 	public void setXPos(int x){xPos = x;}
 	public void setYPos(int y){yPos = y;}
 	public int getPlayerNum(){return playerNumber;}
 	public double getRotation(){return rotation;}
+	public Color getColor(){return color;}
 
 	public void setPosition(double x, double y){
 		xPos += x;
@@ -63,7 +73,7 @@ public class Player{
 		double normal;
 		while(rotation < 0){rotation += 360.0;}
 		while(rotation > 360){rotation -= 360.0;}
-		System.out.println(rotation);
+		//System.out.println(rotation);
 		for(Obstacle o : obstacles){if(bounds.intersects(o.getBounds())){
 			if(xPos <= o.getBounds().getX()){
 				setXPos((int)o.getBounds().getX()-10);
@@ -83,5 +93,9 @@ public class Player{
 	public void refreshBounds(){
 				 bounds = new Rectangle((int)(xPos-(Math.cos(Math.toRadians(rotation))*-10)) -5 ,(int)(yPos-(Math.sin(Math.toRadians(rotation))*-5))-5, 10, 10);
 			 }
+			 public void setCooldown(){coolDown -= 0.016;}
+			 public void resetCooldown(){coolDown = coolDownStore;}
+			 
+				 public double getCooldown(){return coolDown;}
 
 }

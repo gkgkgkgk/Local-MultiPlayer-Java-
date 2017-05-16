@@ -14,6 +14,7 @@ public class Game extends JPanel implements KeyListener{
 	int width = 800;
 	ArrayList<Player> players = new ArrayList<Player>();
 	ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	
 	double time;
 	
@@ -44,7 +45,7 @@ public class Game extends JPanel implements KeyListener{
 					  System.out.println(p.getRotation());
 					p.refreshBounds();
 					p.setPosition(Math.cos(Math.toRadians(p.getRotation())), Math.sin(Math.toRadians(p.getRotation())));
-					
+					p.setCooldown();
 					p.checkCollision(obstacles);
 					//boundary collision//
 					if(p.getYPos()>height-50){p.setYPos(height-50);}
@@ -60,6 +61,10 @@ public class Game extends JPanel implements KeyListener{
 					p.setRotation(-3); 
 				  }
 				  }
+				  for(int i = 0; i < bullets.size(); i++){
+					  Bullet b = bullets.get(i);
+					  b.move();
+				  }
 				  time++;
 		        repaint();
 	}
@@ -73,6 +78,11 @@ public class Game extends JPanel implements KeyListener{
 				 if(e.getKeyChar() == p.getControlLeft()){
 					p.moveLeft = true;
 				 }
+				 if(e.getKeyChar() == p.getControlShoot() && p.getCooldown() <= 0.0){
+					p.shoot = true;
+					bullets.add(new Bullet(p.getXPos(), p.getYPos(), p.getRotation(), p.getColor()));
+					p.resetCooldown();
+				 }
 			 }
 		 }
 		 public void keyReleased(KeyEvent e) {
@@ -82,6 +92,9 @@ public class Game extends JPanel implements KeyListener{
 				 }
 				 if(e.getKeyChar() == p.getControlLeft()){
 					p.moveLeft = false;
+				 }
+				 if(e.getKeyChar() == p.getControlShoot()){
+					p.shoot = false;
 				 }
 			 }
 
@@ -96,7 +109,9 @@ public class Game extends JPanel implements KeyListener{
 			g.setColor(Color.BLACK);
 			g.drawRect(40, 40, width-80, height-80);
 			for(Player p : players){p.DrawPlayer(g);} //draw players
+			for(Bullet b : bullets){b.draw(g);}
 			for(Obstacle o : obstacles){o.draw(g);} //draw obstacles
+			 //draw bullets
 			
 		}
 
